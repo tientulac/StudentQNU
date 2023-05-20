@@ -1,0 +1,237 @@
+<section class="content-header" style="padding:0.5%  !important">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+            </div>
+            <div class="col-md-6">
+                <button nz-button [nzType]="'primary'" (click)="openAddModal('')" style="float: right;"><span><i
+                            class="fas fa-plus"></i>&nbsp;Thêm mới</span></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content cus-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="active tab-pane">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <div class="container">
+                                </div>
+                                <nz-table #basicTable [nzData]="listClass">
+                                    <thead>
+                                        <tr>
+                                            <th class="fw-b">Mã</th>
+                                            <th class="fw-b">Tên lớp</th>
+                                            <th class="fw-b">Phòng học</th>
+                                            <th class="fw-b">Tiết học</th>
+                                            <th class="fw-b">Giáo viên</th>
+                                            <th class="fw-b">Số chỗ</th>
+                                            <th class="fw-b">Mô tả</th>
+                                            <th class="fw-b">Môn học</th>
+                                            <th class="fw-b">Ngày tạo</th>
+                                            <th class="fw-b">Ngày cập nhật</th>
+                                            <th class="fw-b">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of basicTable.data">
+                                            <td>{{data.ClassCode}}</td>
+                                            <td>{{data.ClassName}}</td>
+                                            <td>{{data.Room}}</td>
+                                            <td>{{data.Lession}}</td>
+                                            <td>{{data.Teacher}}</td>
+                                            <td>{{data.Slot}}</td>
+                                            <td>{{data.Descrip}}</td>
+                                            <td>{{data.SubjectName}}</td>
+                                            <td>{{data.CreatedAt | date: 'dd/MM/yyyy hh:mm:aa'}}</td>
+                                            <td>{{data.UpdatedAt | date: 'dd/MM/yyyy hh:mm:aa'}}</td>
+                                            <td>
+                                                <a><span class="table-icon" nz-icon nzType="edit"
+                                                        (click)="openAddModal(data)" nzTheme="outline"></span></a>
+                                                <nz-divider nzType="vertical"></nz-divider>
+                                                <a><span class="table-icon" nz-icon nzType="delete"
+                                                        (click)="openDeleteModal(data.ClassId)"
+                                                        nzTheme="outline"></span></a>
+                                                <nz-divider nzType="vertical"></nz-divider>
+                                                <a><span class="table-icon" nz-icon nzType="info-circle"
+                                                        (click)="openStudentModal(data)" nzTheme="outline"></span></a>
+                                                <nz-divider nzType="vertical"></nz-divider>
+                                                <a><span class="table-icon" nz-icon nzType="usergroup-add"
+                                                        (click)="openStudentByClassModal(data)"
+                                                        nzTheme="outline"></span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </nz-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<nz-modal [(nzVisible)]="isDisplayAddModal" nzTitle="Thêm mới" nzCancelText="Đóng" nzOkText="Xác nhận"
+    (nzOnCancel)="handleCancel()" (nzOnOk)="addNew()">
+    <ng-container *nzModalContent>
+        <form nz-form nzLayout="vertical" [formGroup]="addForm" (ngSubmit)="submitForm()">
+            <div class="row">
+                <nz-form-item class="col-md-12">
+                    <nz-form-label>Mã</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="ClassCode" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-12">
+                    <nz-form-label>Tên lớp</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="ClassName" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-12">
+                    <nz-form-label>Phòng học</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="Room" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-6">
+                    <nz-form-label>Tiết học</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="Lession" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-6">
+                    <nz-form-label>Số chỗ</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="Slot" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-12">
+                    <nz-form-label>Giáo viên</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="Teacher" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="col-md-12">
+                    <nz-form-label>Mô tả</nz-form-label>
+                    <nz-form-control>
+                        <input formControlName="Descrip" nz-input placeholder="Nhập" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </form>
+        <nz-form-item class="row col-md-12">
+            <nz-form-label>Môn</nz-form-label>
+            <nz-select style="width: 100%;" [(ngModel)]="subject_selected" nzShowSearch nzAllowClear>
+                <nz-option *ngFor="let g of listSubject" [nzValue]="g.SubjectId"
+                    nzLabel="{{g.SubjectName}}"></nz-option>
+            </nz-select>
+        </nz-form-item>
+    </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isDisplayDelete" nzTitle="Xóa bản ghi" nzCancelText="Đóng" nzOkText="Xác nhận"
+    (nzOnCancel)="handleCancel()" (nzOnOk)="delete()">
+    <ng-container *nzModalContent>
+        <h5 class="text-center">Bạn có chắc muốn xóa bản ghi này ?</h5>
+        <i class="trash-icon fa fa-trash" aria-hidden="true"></i>
+    </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isDisplayStudent" [nzTitle]="titleModal" nzCancelText="Đóng" nzOkText="Xác nhận"
+    [nzWidth]="1200" (nzOnCancel)="handleCancel()" (nzOnOk)="addStudent()">
+    <ng-container *nzModalContent>
+        <button nz-button [nzType]="'primary'" (click)="addStudent()" style="float: right;margin-bottom: 15px;"><span><i
+                    class="fas fa-plus"></i>&nbsp;Thêm học sinh vào lớp này</span></button>
+        <div class="table-responsive">
+            <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listStudent"
+                (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+                <thead>
+                    <tr>
+                        <th [nzSelections]="listStudent" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+                            (nzCheckedChange)="onAllChecked($event)"></th>
+                        <th class="fw-b">Mã</th>
+                        <th class="fw-b">Họ tên</th>
+                        <th class="fw-b">Tuổi</th>
+                        <th class="fw-b">Giới tính</th>
+                        <th class="fw-b">Hệ</th>
+                        <th class="fw-b">Khoa</th>
+                        <th class="fw-b">Khóa</th>
+                        <th class="fw-b">Email</th>
+                        <th class="fw-b">Số điện thoại</th>
+                        <th class="fw-b">Địa chỉ</th>
+                        <th class="fw-b">Trạng thái</th>
+                        <th class="fw-b">Ngày nhập học</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data">
+                        <td [nzChecked]="setOfCheckedId.has(data.StudentId)"
+                            (nzCheckedChange)="onItemChecked(data.StudentId, $event)"></td>
+                        <td>{{data.StudentCode}}</td>
+                        <td>{{data.FullName}}</td>
+                        <td>{{data.Age}}</td>
+                        <td>{{data.Gender == 0 ? 'Nữ' : data.Gender == 1 ? 'Nam' : 'Khác'}}</td>
+                        <td>{{data.GenreName}}</td>
+                        <td>{{data.MajorName}}</td>
+                        <td>{{data.SchoolYearName}}</td>
+                        <td>{{data.Email}}</td>
+                        <td>{{data.Phone}}</td>
+                        <td>{{data.Address}}</td>
+                        <td>{{Status == 0 ? 'Thôi học' : Status == 1 ? 'Đang học' : 'Bảo lưu'}}</td>
+                        <td>{{data.AdmisionDate | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isDisplayStudentByClass" [nzTitle]="titleModal" nzCancelText="Đóng" nzOkText="Xác nhận"
+    [nzWidth]="1200" (nzOnCancel)="handleCancel()" (nzOnOk)="handleCancel()">
+    <ng-container *nzModalContent>
+        <div class="table-responsive">
+            <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listStudent"
+                (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+                <thead>
+                    <tr>
+                        <th class="fw-b">Mã</th>
+                        <th class="fw-b">Họ tên</th>
+                        <th class="fw-b">Tuổi</th>
+                        <th class="fw-b">Giới tính</th>
+                        <th class="fw-b">Hệ</th>
+                        <th class="fw-b">Khoa</th>
+                        <th class="fw-b">Khóa</th>
+                        <th class="fw-b">Email</th>
+                        <th class="fw-b">Số điện thoại</th>
+                        <th class="fw-b">Địa chỉ</th>
+                        <th class="fw-b">Trạng thái</th>
+                        <th class="fw-b">Ngày nhập học</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data">
+                        <td>{{data.StudentCode}}</td>
+                        <td>{{data.FullName}}</td>
+                        <td>{{data.Age}}</td>
+                        <td>{{data.Gender == 0 ? 'Nữ' : data.Gender == 1 ? 'Nam' : 'Khác'}}</td>
+                        <td>{{data.GenreName}}</td>
+                        <td>{{data.MajorName}}</td>
+                        <td>{{data.SchoolYearName}}</td>
+                        <td>{{data.Email}}</td>
+                        <td>{{data.Phone}}</td>
+                        <td>{{data.Address}}</td>
+                        <td>{{Status == 0 ? 'Thôi học' : Status == 1 ? 'Đang học' : 'Bảo lưu'}}</td>
+                        <td>{{data.AdmisionDate | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </ng-container>
+</nz-modal>

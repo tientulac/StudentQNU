@@ -1,0 +1,36 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form [formGroup]="loginForm" class="login100-form validate-form" style="padding-top: 70px !important;">
+                <span class="login100-form-title p- -43" style="margin-bottom: 30px;font-weight: bold; font-style: italic;color:#3b6891 !important">
+                    StudentManagement
+                </span>
+                <label class="label_login"><i class="fas fa-user"></i> &nbsp; Tài khoản
+                </label>
+                <div class="wrap-input100 validate-input" style="height: 45px;">
+                    <input class="input100" placeholder="Nhập tên tài khoản" formControlName="UserName" type="text"
+                        style="border-radius: 90px;" />
+                    <span class="focus-input100"></span>
+                    <span class="label-input100"></span>
+                </div>
+                <label class="label_login"><i class="fas fa-key"></i> &nbsp; Mật khẩu
+                </label>
+                <div class="wrap-input100 validate-input" data-validate="Password is required" style="height: 45px;">
+                    <input class="input100" placeholder="Nhập mật khẩu" type="password" formControlName="Password"
+                        style="border-radius: 90px;" />
+                    <span class="focus-input100"></span>
+                    <span class="label-input100"></span>
+                </div>
+
+                <div class="container-login100-form-btn" style="margin-top: 30px;">
+                    <button class="login100-form-btn" (click)="login()" style="height: 45px;">
+                        Đăng nhập
+                    </button>
+                </div>
+            </form>
+            <div class="login100-more"
+                style="background-image: url('https://img.freepik.com/free-vector/student-dormitory-room-with-bunk-laptop-desk-office-chair-bookshelf-vector-cartoon-interior-empty-dorm-bedroom-hostel-apartment-with-wooden-bed-with-ladder-table_107791-9859.jpg?w=2000')">
+            </div>
+        </div>
+    </div>
+</div>

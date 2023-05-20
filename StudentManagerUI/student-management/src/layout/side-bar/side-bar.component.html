@@ -1,0 +1,86 @@
+<aside #mainSidebar class="main-sidebar sidebar-light-primary elevation-4 cus-text"
+    style="overflow: visible !important; position: fixed;">
+    <!-- Brand Logo -->
+    <a [routerLink]="['/']" class="brand-link">
+        <img src="assets/img/unilogo.png" class="brand-image" />
+        <span class="brand-text font-weight-light">StudentManagement</span>
+    </a>
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li id="menu1" class="nav-item menu-open">
+                    <a class="nav-link cus-bg" (click)="menu('menu1')" style="background: #418994; color: white;">
+                        &nbsp;
+                        <p>Danh mục<i class="right fa fa-angle-left"></i> </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/point-type']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p>&nbsp;Loại điểm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/subject']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                                <p>&nbsp;Môn học</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/genre']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <p>&nbsp;Hệ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/major']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <p>&nbsp;Khoa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/school-year']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <p>&nbsp;Khóa</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="menu2" class="nav-item menu-open">
+                    <a class="nav-link cus-bg" (click)="menu('menu2')" style="background: #418994; color: white;">
+                        &nbsp;
+                        <p>Sinh viên<i class="right fa fa-angle-left"></i> </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/student']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <p>&nbsp;Thông tin chung</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/admin/class']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <p>&nbsp;Lớp</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a [routerLink]="['/admin/point']" class="nav-link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                <p>&nbsp;Bảng điểm</p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
